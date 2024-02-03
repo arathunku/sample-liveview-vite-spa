@@ -4,8 +4,17 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-);
+const mount = (element) => {
+  const root = ReactDOM.createRoot(element);
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>,
+  );
+
+  return () => {
+    root.unmount();
+  };
+};
+
+export default mount;
