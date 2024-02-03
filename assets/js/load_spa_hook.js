@@ -1,3 +1,4 @@
+// required by Vite
 const setupReactPatching = (callback) => {
   if (window.$RefreshReg$) {
     callback()

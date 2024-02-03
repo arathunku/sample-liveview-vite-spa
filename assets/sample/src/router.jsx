@@ -1,23 +1,27 @@
 import {
   createBrowserRouter,
   createRoutesFromElements,
-  RouterProvider,
   Route,
   Link,
   Outlet,
 } from "react-router-dom";
 import ReactSvg from "./assets/react.svg";
+import Contact from "./Contact";
 
-// see: https://github.com/phoenixframework/phoenix_live_view/blob/d41ea3b55b2a6a74c3a5634737f0a998042b32f3/lib/phoenix_component.ex#L2667
-const LiveLink = ({ navigate, href, replace, ...props }) => {
-  const dataProps = {}
+const LiveLink = ({ navigate, href, patch, replace, ...props }) => {
+  const dataProps = {};
 
   if (navigate) {
-    dataProps["data-phx-link"] = "redirect"
-    dataProps["data-phx-link-state"] = replace ? "replace" : "push"
+    dataProps["data-phx-link"] = "redirect";
+    dataProps["data-phx-link-state"] = replace ? "replace" : "push";
+  } else if (patch) {
+    dataProps["data-phx-link"] = "patch";
+    dataProps["data-phx-link-state"] = replace ? "replace" : "push";
   }
 
-  return <Link to={navigate || href || "#"} {...props} {...dataProps} />;
+  return (
+    <Link to={navigate || patch || href || "#"} {...props} {...dataProps} />
+  );
 };
 
 const Root = (props) => (
@@ -30,9 +34,15 @@ const Root = (props) => (
           </Link>
         </div>
         <div className="flex items-center gap-4 font-semibold leading-6 text-zinc-900">
-          <Link to="about" className="hover:text-zinc-700">About</Link>
-          <Link to="contact" className="hover:text-zinc-700">Contact</Link>
-          <LiveLink navigate="login" className="hover:text-zinc-700">Login</LiveLink>
+          <Link to="about" className="hover:text-zinc-700">
+            About
+          </Link>
+          <LiveLink patch="contact" className="hover:text-zinc-700">
+            Contact
+          </LiveLink>
+          <LiveLink navigate="login" className="hover:text-zinc-700">
+            Login
+          </LiveLink>
         </div>
       </div>
     </header>
@@ -45,48 +55,41 @@ const Root = (props) => (
 );
 
 // Taken mostly from https://reactrouter.com/en/main/start/overview
-const getRouter = () => createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<Root />}>
-      <Route
-        path=""
-        element={
-          <>
-            <p>Landing page</p>
-            <p>Cheers from React</p>
-          </>
-        }
-      />
-      <Route
-        path="about"
-        element={
-          <>
-            <div>About</div>
-          </>
-        }
-      />
-      <Route
-        path="contact"
-        element={
-          <>
-            <div>Contact</div>
-          </>
-        }
-      />
-      <Route
-        path="login"
-        element={
-          <>
-            <div>Login</div>
-          </>
-        }
-      />
-    </Route>,
-  ),
-  {
-    basename: "/app",
-  },
-);
-
+const getRouter = () =>
+  createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<Root />}>
+        <Route
+          path=""
+          element={
+            <>
+              <p>Landing page</p>
+              <p>Cheers from React</p>
+            </>
+          }
+        />
+        <Route
+          path="about"
+          element={
+            <>
+              <div>About</div>
+            </>
+          }
+        />
+        <Route path="contact" element={<Contact />} />
+        <Route
+          path="login"
+          element={
+            <>
+              <div>Login</div>
+            </>
+          }
+        />
+      </Route>,
+    ),
+    {
+      basename: "/app",
+    },
+  );
 
 export { getRouter };

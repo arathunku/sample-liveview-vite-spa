@@ -5,15 +5,15 @@ defmodule SampleWeb.SpaLive do
     {:ok, socket, layout: {SampleWeb.Layouts, :spa}}
   end
 
-  # TODO:
-  # <!-- if production -->
-  # <link rel="stylesheet" href="/assets/{{ manifest['main.js'].css }}" />
-  # <script type="module" src="/assets/{{ manifest['main.js'].file }}"></script>
-
   def render(assigns) do
+    #  It's critical that div where the SPA is going to be rendered is ignored with phx-update
     ~H"""
-    <!-- It's critical that div where the SPA is rendered is ignored by phx-update -->
     <div id="root" phx-update="ignore" phx-hook="LoadSPA"></div>
     """
+  end
+
+  # When URLs changes, do nothing
+  def handle_params(uri, _, socket) do
+    {:noreply, socket}
   end
 end
