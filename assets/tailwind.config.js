@@ -8,6 +8,7 @@ const path = require("path")
 module.exports = {
   content: [
     "./js/**/*.js",
+    "./sample/src/**/*.js*",
     "../lib/sample_web.ex",
     "../lib/sample_web/**/*.*ex"
   ],
