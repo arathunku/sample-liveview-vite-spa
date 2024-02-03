@@ -19,6 +19,7 @@ defmodule SampleWeb.Router do
 
     get "/", PageController, :home
 
+    live "/app/login", LoginLive
     live "/app/*path", SpaLive
   end
 
