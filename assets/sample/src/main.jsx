@@ -2,13 +2,17 @@ import "vite/modulepreload-polyfill";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./App.jsx";
+import { getRouter } from "./router.jsx";
+
+import { RouterProvider, } from "react-router-dom";
 
 const mount = (element) => {
   const root = ReactDOM.createRoot(element);
+  const router = getRouter();
+
   root.render(
     <React.StrictMode>
-      <App />
+      <RouterProvider router={router} />
     </React.StrictMode>,
   );
 

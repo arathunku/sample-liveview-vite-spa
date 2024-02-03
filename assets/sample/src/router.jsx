@@ -30,9 +30,9 @@ const Root = (props) => (
           </Link>
         </div>
         <div className="flex items-center gap-4 font-semibold leading-6 text-zinc-900">
-          <Link to="about">About</Link>
-          <Link to="contact">Contact</Link>
-          <LiveLink navigate="login">Login</LiveLink>
+          <Link to="about" className="hover:text-zinc-700">About</Link>
+          <Link to="contact" className="hover:text-zinc-700">Contact</Link>
+          <LiveLink navigate="login" className="hover:text-zinc-700">Login</LiveLink>
         </div>
       </div>
     </header>
@@ -45,7 +45,7 @@ const Root = (props) => (
 );
 
 // Taken mostly from https://reactrouter.com/en/main/start/overview
-const router = createBrowserRouter(
+const getRouter = () => createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
       <Route
@@ -88,6 +88,5 @@ const router = createBrowserRouter(
   },
 );
 
-const App = () => <RouterProvider router={router} />;
 
-export default App;
+export { getRouter };
