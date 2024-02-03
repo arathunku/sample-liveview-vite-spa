@@ -19,7 +19,7 @@ defmodule SampleWeb.Router do
 
     get "/", PageController, :home
 
-    live "/app", SpaLive
+    live "/app/*path", SpaLive
   end
 
   # Other scopes may use custom stacks.

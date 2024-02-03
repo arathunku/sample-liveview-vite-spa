@@ -1,28 +1,72 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+  Route,
+  Link,
+  Outlet,
+} from "react-router-dom";
 
-function App() {
-  const [count, setCount] = useState(0)
+const Root = (props) => (
+  <div>
+    <Outlet />
+  </div>
+);
 
-  return (
-    <>
-      <div class="flex justify-center">
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-    </>
-  )
-}
+// Taken mostly from https://reactrouter.com/en/main/start/overview
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Root />}>
+      <Route
+        path=""
+        element={
+          <ul>
+            <li>
+              <Link to="about">About Us</Link>
+            </li>
+            <li>
+              <Link to="contact">Contact</Link>
+            </li>
+            <li>
+              <Link to="login">Login</Link>
+            </li>
+          </ul>
+        }
+      />
+      <Route
+        path="about"
+        element={
+          <>
+            <div>About</div>
+            <Link to="/">Go back</Link>
+          </>
+        }
+      />
+      <Route
+        path="contact"
+        element={
+          <>
+            <div>Contact</div>
+            <Link to="/">Go back</Link>
+          </>
+        }
+      />
+      <Route
+        path="login"
+        element={
+          <>
+            <div>Login</div>
+            <Link to="/">Go back</Link>
+          </>
+        }
+      />
+    </Route>,
+  ),
+  {
+    basename: "/app",
+  },
+);
 
-export default App
+const App = () => <RouterProvider router={router} />;
+
+export default App;
