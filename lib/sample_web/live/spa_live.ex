@@ -1,7 +1,7 @@
 defmodule SampleWeb.SpaLive do
   use SampleWeb, :live_view
 
-  def mount(params, session, socket) do
+  def mount(_params, _session, socket) do
     {:ok, socket, layout: {SampleWeb.Layouts, :spa}}
   end
 
@@ -13,7 +13,7 @@ defmodule SampleWeb.SpaLive do
   end
 
   # When URLs changes, do nothing
-  def handle_params(uri, _, socket) do
+  def handle_params(_uri, _, socket) do
     {:noreply, socket}
   end
 end
