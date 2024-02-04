@@ -19,10 +19,7 @@ const LoadSPA = {
     setupReactPatching(() => {
       import("http://localhost:5173/@vite/client")
       import("http://localhost:5173/src/main.jsx").then(mount => {
-        console.log({ browserUrl: window.location.href, liveSocketUrl: this.liveSocket.href })
-
-        const url = new URL(this.liveSocket.href)
-        this.unmount= mount.default(this.el)
+        this.unmount = mount.default(this.el)
       })
     })
   },
