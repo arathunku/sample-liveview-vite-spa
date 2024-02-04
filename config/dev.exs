@@ -23,7 +23,8 @@ config :sample, SampleWeb.Endpoint,
   secret_key_base: "43Q7Suc5jKSkdQJSaleJm6/96MjPk2EV4YAGA67M78XXYB1xKOdf9BfPqFFsRj/G",
   watchers: [
     esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
-    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
+    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]},
+    npm: ["run", "dev", cd: "assets/sample"],
   ]
 
 # ## SSL Support
