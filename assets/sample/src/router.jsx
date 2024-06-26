@@ -37,9 +37,9 @@ const Root = (props) => (
           <Link to="about" className="hover:text-zinc-700">
             About
           </Link>
-          <LiveLink patch="contact" className="hover:text-zinc-700">
+          <Link to="contact" className="hover:text-zinc-700">
             Contact
-          </LiveLink>
+          </Link>
           <LiveLink navigate="login" className="hover:text-zinc-700">
             Login
           </LiveLink>
